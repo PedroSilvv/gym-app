@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+
+<div>
+    <h3>Bem vindo {{request.user.username}}</h3>
+    <br>
+    <p>{{msg}}</p>
+    <br>
+    <div style="display: flex; gap: 20px;">
+        <a>Aprovar Treinos</a>
+        <a href="{% url 'registrar' %}">Cadastrar Aluno</a>
+        <a>Buscar Aluno</a></div>
+    
+</div>
+
+
+
+</body>
+</html>

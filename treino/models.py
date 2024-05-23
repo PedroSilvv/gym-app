@@ -1,5 +1,5 @@
 from django.db import models
-from ..user.models import Aluno
+from user.models import Aluno
 
 RESTRICOES_CHOICES = [
     ('Cabeça', 'Cabeça'),

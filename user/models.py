@@ -65,6 +65,9 @@ class CustomUser(AbstractUser):
     cpf = models.CharField(max_length=11, null=True)
     endereco = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.username
+
     groups = models.ManyToManyField(
     Group,
     related_name='customuser_set',
@@ -96,7 +99,6 @@ class Aluno(models.Model):
 
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    esportes_praticados = models.ManyToManyField(Esporte, related_name='usuarios')
     peso = models.FloatField(blank=True, null=True)
     altura = models.PositiveIntegerField(blank=True, null=True)
     experiencia = models.CharField(max_length=100, blank=True, null=True, choices=EXP_CHOICES) 
@@ -110,7 +112,7 @@ class Aluno(models.Model):
 
 
     def __str__(self):
-        return self.user.username
+        return f"Nome: {self.user.nome} - Username: {self.user.username}"
 
     def get_lesoes_list(self):
         if self.lesoes:

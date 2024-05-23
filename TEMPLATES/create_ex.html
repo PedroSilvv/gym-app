@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Exercicio</title>
+</head>
+<body>
+    <form method="post" action="{% url 'criar-treino' %}">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome" required><br>
+
+        <label for="descricao">Descrição:</label><br>
+        <textarea type="text" name="descricao" id="descricao"></textarea><br>
+
+        <select name="tipo" id="tipo" multiple>
+            <option value="Cardiovascular">Cardiovascular</option>
+            <option value="Definicao">Definição</option>
+            <option value="Forca">Força</option>
+            <option value="Funcional">Funcional</option>
+            <option value="Hipertrofia">Hipertrofia</option>
+            <option value="Resistencia">Resistência</option>
+            <option value="Terapeutico">Terapêutico</option>
+        </select><br>
+
+        <select name="nivel" id="nivel" multiple>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediario">Intermediario</option>
+            <option value="Avançado">Avançado</option> 
+        </select><br>
+
+        <label for="objetivos">Objetivos:</label><br>
+        {% for valor, display in objetivos_list %}
+            <input type="checkbox" name="lesoes" value="{{ valor }}"> {{ display }}<br>
+        {% endfor %}
+        <br>
+
+        <label for="restricoes">Restrições:</label><br>
+        {% for valor, display in restricoes_list %}
+            <input type="checkbox" name="lesoes" value="{{ valor }}"> {{ display }}<br>
+        {% endfor %}
+        <br>
+
+        <button type="submit">Criar</button>
+
+    </form>
+</body>
+</html>

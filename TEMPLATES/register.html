@@ -20,11 +20,21 @@
         <label for="password">Password:</label>
         <input type="password" name="password" id="password" required><br>
 
+
         <label for="peso">Peso:</label><br>
         <input type="number" step="0.1" name="peso" id="peso"><br>
 
         <label for="altura">Altura:</label><br>
         <input type="number" name="altura" id="altura" placeholder="Coloque a altura em CM"><br>
+
+        <select name="experiencia" id="experiencia" multiple>
+            <option value="Iniciante">Iniciante</option>
+            <option value="Intermediario">Intermediario</option>
+            <option value="Avançado">Avançado</option> 
+        </select><br>
+
+        <label for="dias">Dias de treino por semana:</label><br>
+        <input type="number" name="dias" id="dias" placeholder="Treinos semanais."><br>
 
         <label for="esportes">Esportes:</label>
         <br>
@@ -42,13 +52,16 @@
         <br>
 
         <label for="objetivos">Objetivos:</label><br>
-        <textarea type="text" name="objetivos" id="objetivos"></textarea><br>
+        {% for value, display in objetivos_list %}
+            <input type="checkbox" name="objetivos" id="objetivos" value="{{ value }}"> {{ display }}<br>
+        {% endfor %}
+        <br>
 
-        <select name="experiencia" id="experiencia" multiple>
-            <option value="Iniciante">Iniciante</option>
-            <option value="Intermediario">Intermediario</option>
-            <option value="Avançado">Avançado</option> 
-        </select><br>
+        <label for="observacoes">Observações:</label><br>
+        {% for value, display in observacoes_list %}
+            <input type="checkbox" name="observacoes" id="observacoes" value="{{ value }}"> {{ display }}<br>
+        {% endfor %}
+        <br>
 
         <select name="role" id="role">
             <option value="Default">Default</option>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Esporte, CustomUser, Aluno, LESOES_CHOICES
+from .models import Esporte, CustomUser, Aluno, LESOES_CHOICES, OBJETIVOS_CHOICES, OBSERVACOES_CHOICES
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as login_user
 from django.contrib.auth.models import Group
@@ -14,7 +14,9 @@ def registrar_aluno(request):
         if request.method == "GET":
             return render(request, "register.html", context={
                 "esportes" : Esporte.objects.all(),
-                "lesoes_list" : LESOES_CHOICES
+                "lesoes_list" : LESOES_CHOICES,
+                "objetivos_list" : OBJETIVOS_CHOICES,
+                "observacoes_list" : OBSERVACOES_CHOICES, 
             })
         
         elif request.method == "POST": 
@@ -35,19 +37,28 @@ def registrar_aluno(request):
             user.save()
 
             ##Criando Instancia de ALUNO
-            esporte_ids = request.POST.getlist('esportes')
-            lesoes = request.POST.getlist('lesoes')
-            objetivos = request.POST.get('objetivos')
+
+            #FIELDS SIMPLES
             peso = request.POST.get('peso')
             altura = request.POST.get('altura')
             experiencia = request.POST.get('experiencia')
-            
-            aluno = Aluno.objects.create(user=user, objetivos=objetivos, peso=peso, altura=altura, experiencia=experiencia )
+            dias = request.POST.get('dias')
+            #LIST FIELDS - ALUNO
+            esporte_ids = request.POST.getlist('esportes')
+            lesoes = request.POST.getlist('lesoes')
+            objetivos = request.POST.getlist('objetivos')
+            observacoes = request.POST.getlist('observacoes')
 
+            #PASSANDO USER CRIADO PARA A INSTANCIA DE ALUNO E ADICIONANDO OUTROS CAMPOS
+            aluno = Aluno.objects.create(user=user, peso=peso, altura=altura, experiencia=experiencia, dias_treino_semanal=dias )
+
+            #ADICIONANDO CAMPOS QUE SAO LISTAS OU MANY TO MANY.
             for e in esporte_ids:
                 aluno.esportes_praticados.add(e)
 
             aluno.set_lesoes(lesoes)
+            aluno.set_objetivos(objetivos)
+            aluno.set_observacoes(observacoes)
             aluno.save()
 
             if user:

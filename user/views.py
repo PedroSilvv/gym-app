@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 
 
+
 @login_required(login_url='/user/login/')
 def registrar_aluno(request):
     if request.user.groups.filter(name='Admin').exists():
@@ -102,3 +103,6 @@ def default_view(request):
     return render(request, "default.html", context={
         "msg" : f"Olá, {request.user.username}"
     })
+
+
+

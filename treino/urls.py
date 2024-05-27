@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('gerar-treino/', views.criar_treino, name='criar-treino'),
+    path('gerar-exercicios-random/', views.gerar_exercicios, name='gerar-exercicios')
 ]

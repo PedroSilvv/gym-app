@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Esporte, CustomUser, Aluno, LESOES_CHOICES, OBJETIVOS_CHOICES, OBSERVACOES_CHOICES
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as login_user
 from django.contrib.auth.models import Group
 from random import randint
 from django.contrib.auth.decorators import login_required
+from treino.models import Exercicio, Treino, Serie
 
 
 
@@ -100,8 +101,12 @@ def login(request):
 
 
 def default_view(request):
+
+    aluno = get_object_or_404(Aluno, user=request.user)
+    
     return render(request, "default.html", context={
-        "msg" : f"Olá, {request.user.username}"
+        "msg" : f"Olá, {request.user.username}",
+        "treinos" : Treino.objects.filter(aluno=aluno)
     })
 
 

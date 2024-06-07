@@ -1,27 +1,38 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Adiciona uma cor de fundo semi-transparente para os botões */
+        .btn-red {
+            background: rgba(109, 0, 0, 0.8);
+            transition: background-color 0.3s;
+        }
+        .btn-red:hover {
+            background: rgba(109, 0, 0, 1);
+        }
+    </style>
 </head>
-<body>
-
-<div>
-    <h3>Bem vindo {{request.user.username}}</h3>
-    <br>
-    <p>{{msg}}</p>
-    <br>
-    <div style="display: flex; gap: 20px;">
-        <a>Aprovar Treinos</a>
-        <a href="{% url 'registrar' %}">Cadastrar Aluno</a>
-        <a>Buscar Aluno</a></div>
-        <a href="{% url 'criar-treino' %}">Criar Treino</a>
-        <a href="{% url 'gerar-exercicios' %}">Gerar Exercicios</a>
-    
-</div>
-
-
-
+<body class="h-screen bg-cover bg-center" style="background-image: url({% static 'images/backgroundLogo.png' %});">
+    <div class="flex items-center justify-center h-full bg-black bg-opacity-50">
+        <div class="text-center p-16 bg-white bg-opacity-20 rounded-lg max-w-3xl w-full">
+            <div class="mb-8">
+                <img class="mx-auto w-24" src="{% static 'images/logo.png' %}" alt="logo">
+            </div>
+            <h3 class="text-4xl font-semibold text-white mb-10">Bem-Vindo, {{ request.user.username }}</h3>
+            <div class="space-y-6">
+                <a href="#" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">APROVAR TREINOS</a>
+                <a href="{% url 'registrar' %}" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">CADASTRAR ALUNO</a>
+                <a href="#" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">BUSCAR ALUNO</a>
+                <a href="{% url 'criar-treino' %}" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">CRIAR TREINO</a>
+                <a href="{% url 'gerar-exercicios' %}" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">GERAR EXERCICIOS</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

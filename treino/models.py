@@ -103,7 +103,7 @@ class Treino(models.Model):
     concluido = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Treino de {self.aluno} em {self.data}"
+        return f"Treino de {self.aluno.user.nome} em {self.data}"
 
     @property
     def series(self):
@@ -118,4 +118,4 @@ class Serie(models.Model):
     repeticoes_por_serie = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.exercicio.nome} - (Treino: {self.treino.aluno.nome})"
+        return f"{self.exercicio.nome} - (Treino: {self.treino.aluno.user.nome} em {self.treino.data})"

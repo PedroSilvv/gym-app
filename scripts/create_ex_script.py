@@ -40,4 +40,3 @@ for i in range(1, 41):
     
     criar_exercicio(nome, descricao, tipo, nivel, objetivos, restricoes)
 
-print("40 exercícios foram criados com sucesso!")

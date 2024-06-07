@@ -104,7 +104,7 @@ class Aluno(models.Model):
     experiencia = models.CharField(max_length=100, blank=True, null=True, choices=EXP_CHOICES) 
     dias_treino_semanal = models.IntegerField(null=True)
 
-    #LIST FIELDS
+    #LIST FIELDS  
     observacoes = models.TextField(blank=True, null=True)
     objetivos = models.TextField(max_length=200, blank=True, null=True)
     lesoes = models.TextField(blank=True, null=True)
@@ -138,4 +138,4 @@ class Aluno(models.Model):
         return []
 
     def set_objetivos(self, objetivos_list):
-        self.objetivos = ','.join(objetivos_list)
+        self.objetivos = ','.join(objetivos_list)  

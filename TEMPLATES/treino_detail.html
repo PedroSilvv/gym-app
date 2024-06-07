@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinos</title>
+    <title>Treino</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,22 +56,22 @@
 <body>
 
 <header>
-    <h1>Treinos</h1>
+    <h1>Seus Treinos</h1>
     <h3>{{ msg }}</h3>
 </header>
 
 <div class="container">
-    <h3>Seus próximos treinos:</h3>
-    
-    {% for treino in treinos %}
-        <div class="treino">
-            <a href="{% url 'detalhe-treino' treino.id %}"><h2>Treino criado em {{ treino.data }}</h2></a>
-        </div>
-    {% endfor %}
 
-    <div>
-        <a href="{% url 'aluno-gerar-treino' %}" class="button">Gerar Treino</a>
-    </div>
+        <div class="treino">
+            <h2>Treino criado em {{ treino.data }}</h2>
+            {% for serie in treino.series.all %}
+                <div class="serie">
+                    <p><strong>Exercício:</strong> {{ serie.exercicio.nome }}</p>
+                    <p><strong>Número de Séries:</strong> {{ serie.numero_series }}</p>
+                    <p><strong>Repetições por Série:</strong> {{ serie.repeticoes_por_serie }}</p>
+                </div>
+            {% endfor %}
+        </div>
 </div>
     
 </body>

@@ -75,7 +75,8 @@ def registrar_aluno(request):
         return redirect('default_view')
 
 
-def login(request):
+def login(request): 
+    
     
     if request.method == "GET":
 
@@ -91,7 +92,7 @@ def login(request):
 
             login_user(request, user)
             if user.groups.filter(name='Admin').exists():
-                return render(request, "admin_home.html")
+                return redirect('admin-home')
             else:
                 return redirect('default_view')
 
@@ -102,12 +103,27 @@ def login(request):
 
 def default_view(request):
 
-    aluno = get_object_or_404(Aluno, user=request.user)
+    if request.user.groups.filter(name='Default').exists():
+        aluno = get_object_or_404(Aluno, user=request.user)
+        
+        return render(request, "default.html", context={
+            "user" : f"{request.user.nome}",
+            "treinos" : Treino.objects.filter(aluno=aluno, concluido=False, aceitou=True)
+        })
+    else:
+        return redirect('admin-home')
     
-    return render(request, "default.html", context={
-        "msg" : f"Olá, {request.user.username}",
-        "treinos" : Treino.objects.filter(aluno=aluno)
-    })
 
+def admin_home(request):
 
+    if request.user.groups.filter(name='Admin').exists():
+        personal = request.user
+        treinos_para_feedback = Treino.objects.filter(personal=personal)
+
+        return render(request, "admin_home.html", context={
+            "notificacoes" : treinos_para_feedback,
+            "mostrar_notificacoes" : True,
+        })
+    else:
+        return redirect('default_view')
 

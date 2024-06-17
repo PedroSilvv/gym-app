@@ -1,0 +1,20 @@
+{% load static %}
+<header class="bg-[#6D0000] flex justify-between items-center px-6 py-4">
+    <!-- Logo -->
+    <div>
+        <img src="{% static 'images/logoLogin.png' %}" alt="Logo" class="h-12">
+    </div>
+    <!-- Hamburger Menu Icon -->
+    
+    {%if not mostrar_notificacoes%}
+    <div class="space-y-1.5">
+        <div class="w-8 h-0.5 bg-white"></div>
+        <div class="w-8 h-0.5 bg-white"></div>
+        <div class="w-8 h-0.5 bg-white"></div>
+    </div>
+    {%endif%}
+
+    {%if mostrar_notificacoes%}
+        <a href="#"  class="text-white"><i id="notification-link" class="fas fa-bell text-2xl"></i></a>
+    {%endif%}
+</header>

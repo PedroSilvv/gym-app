@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Adiciona uma cor de fundo semi-transparente para os botões */
         .btn-red {
             background: rgba(109, 0, 0, 0.8);
-            transition: background-color 0.3s;
         }
         .btn-red:hover {
             background: rgba(109, 0, 0, 1);
@@ -18,21 +18,46 @@
     </style>
 </head>
 <body class="h-screen bg-cover bg-center" style="background-image: url({% static 'images/backgroundLogo.png' %});">
+
+    {% include "parciais/header.html" %}
+    {% include "parciais/notificacoes.html" %}
+
     <div class="flex items-center justify-center h-full bg-black bg-opacity-50">
-        <div class="text-center p-16 bg-white bg-opacity-20 rounded-lg max-w-3xl w-full">
+        <div class="text-center p-8 bg-white bg-opacity-20 rounded-lg">
             <div class="mb-8">
-                <img class="mx-auto w-24" src="{% static 'images/logo.png' %}" alt="logo">
+                <img class="mx-auto w-16" src="{% static 'images/logo.png' %}" alt="logo">
             </div>
-            <h3 class="text-4xl font-semibold text-white mb-10">Bem-Vindo, {{ request.user.username }}</h3>
-            <div class="space-y-6">
-                <a href="#" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">APROVAR TREINOS</a>
-                <a href="{% url 'registrar' %}" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">CADASTRAR ALUNO</a>
-                <a href="#" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">BUSCAR ALUNO</a>
-                <a href="{% url 'criar-treino' %}" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">CRIAR TREINO</a>
-                <a href="{% url 'gerar-exercicios' %}" class="btn-red text-white font-semibold py-4 px-12 rounded-md inline-block">GERAR EXERCICIOS</a>
+            <h3 class="text-3xl font-semibold text-white mb-6">Bem-Vindo, {{ request.user.username }}</h3>
+            <div class="space-y-4">
+                <a href="#" class="btn-red text-white font-semibold py-3 px-8 rounded-md block">APROVAR TREINOS</a>
+                <a href="{% url 'registrar' %}" class="btn-red text-white font-semibold py-3 px-8 rounded-md block">CADASTRAR ALUNO</a>
+                <a href="#" class="btn-red text-white font-semibold py-3 px-8 rounded-md block">BUSCAR ALUNO</a>
+                <a href="{% url 'criar-treino' %}" class="btn-red text-white font-semibold py-3 px-8 rounded-md block">CRIAR TREINO</a>
+                <a href="{% url 'gerar-exercicios' %}" class="btn-red text-white font-semibold py-3 px-8 rounded-md block">GERAR EXERCICIOS</a>
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('notification-link').addEventListener('click', function(event) {
+          event.preventDefault();
+          var panel = document.getElementById('notification-panel');
+          if (panel.style.display === 'block') {
+            panel.style.display = 'none';
+          } else {
+            panel.style.display = 'block';
+          }
+        });
+    
+        // Fechar painel ao clicar fora dele
+        document.addEventListener('click', function(event) {
+          var panel = document.getElementById('notification-panel');
+          var link = document.getElementById('notification-link');
+          if (!panel.contains(event.target) && event.target !== link) {
+            panel.style.display = 'none';
+          }
+        });
+      </script>
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>

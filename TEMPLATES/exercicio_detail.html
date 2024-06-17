@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-[#6D0000] flex justify-between items-center px-6 py-4">
+        <!-- Logo -->
+        <div>
+            <img src="{% static 'images/logoLogin.png' %}" alt="Logo" class="h-12">
+        </div>
+        <!-- Hamburger Menu Icon -->
+        <div class="space-y-1.5">
+            <div class="w-8 h-0.5 bg-white"></div>
+            <div class="w-8 h-0.5 bg-white"></div>
+            <div class="w-8 h-0.5 bg-white"></div>
+        </div>
+    </header>
+
+    <!-- Video and Exercise Description Section -->
+    <div class="container mx-auto p-4 mt-10 max-w-4xl rounded-lg">
+        
+        <div class="flex flex-col items-start">
+            <h2 class="font-manrope text-2xl font-bold mb-4">Treino A</h2>
+            <!-- Video Section -->
+            <div class="w-full mb-6 mt-2">
+                <video class="w-full rounded-lg" autoplay controls>
+                    <source src="https://www.youtube.com/watch?v=PPXzr6vM5-A" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- Exercise Description -->
+            <h2 class="font-manrope text-2xl font-bold mb-4">{{ex.nome}}</h2>
+            <div class="grid grid-cols-3 gap-4 w-full">
+                <div>
+                    <h3 class="font-manrope text-[#6D0000] font-bold">SÉRIES</h3>
+                    <p class="font-manrope  text-xl">{{serie.numero_series}}s</p>
+                </div>
+                <div>
+                    <h3 class="font-manrope text-[#6D0000] font-bold">REPETIÇÕES</h3>
+                    <p class="font-manrope text-xl">{{ serie.repeticoes_por_serie }}</p>
+                </div>
+                <div>
+                    <h3 class="font-manrope text-[#6D0000] font-bold">INTERVALO</h3>
+                    <p class="font-manrope text-xl">60' a 120'</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-4 mt-2 max-w-4xl">
+        <hr class="border-t-2 border-gray-300">
+    </div>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js" integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

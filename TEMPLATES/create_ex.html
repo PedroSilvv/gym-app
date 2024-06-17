@@ -1,49 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Exercicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <form method="post" action="{% url 'criar-treino' %}">
-        {% csrf_token %}
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" required><br>
+<body class="h-screen bg-neutral-200 dark:bg-neutral-700">
 
-        <label for="descricao">Descrição:</label><br>
-        <textarea type="text" name="descricao" id="descricao"></textarea><br>
+  {% include "parciais/header.html" %}
 
-        <select name="tipo" id="tipo" multiple>
-            <option value="Cardiovascular">Cardiovascular</option>
-            <option value="Definicao">Definição</option>
-            <option value="Forca">Força</option>
-            <option value="Funcional">Funcional</option>
-            <option value="Hipertrofia">Hipertrofia</option>
-            <option value="Resistencia">Resistência</option>
-            <option value="Terapeutico">Terapêutico</option>
-        </select><br>
+    <section class="h-full">
+        <div class="container h-full p-10 mx-auto">
+          <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+            <div class="w-full">
+              <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
+                <div class="g-0 lg:flex lg:flex-wrap h-full">
+                  <!-- Left column container-->
+                  <div class="px-4 md:px-0 lg:w-6/12 flex items-center justify-center">
+                    <div class="md:mx-6 md:p-12">
+                      <!--Logo-->
+                      <div class="text-center">
+                        <img class="mx-auto w-16" src="{% static 'images/logo.png' %}" alt="logo" />
+                        <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">E-Personal</h4>
+                      </div>
+      
+                      <h2 class="text-center text-2xl font-semibold mb-4">Register</h2>
+                      <p class="text-center mb-4">{{msg}}</p>
+                      <form method="post">
+                        {% csrf_token %}
+                        <!--Nome input-->
+                        <div class="relative mb-4">
+                          <label for="nome" class="block text-neutral-500">Nome</label>
+                          <input type="text" name="nome" id="nome" required class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder-text-neutral-300" placeholder="Nome" />
+                        </div>
+      
+                        <!--Descrição input-->
+                        <div class="relative mb-4">
+                          <label for="descricao" class="block text-neutral-500">Descrição</label>
+                          <textarea type="text" name="descricao" id="descricao" class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder-text-neutral-300" placeholder="Descrição"></textarea>
+                        </div>
+      
+                        <!--Tipo input-->
+                        <div class="relative mb-4">
+                          <label for="tipo" class="block text-neutral-500">Tipo</label>
+                          <select name="tipo" id="tipo" multiple class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder-text-neutral-300">
+                            <option value="Cardiovascular">Cardiovascular</option>
+                            <option value="Definicao">Definição</option>
+                            <option value="Forca">Força</option>
+                            <option value="Funcional">Funcional</option>
+                            <option value="Hipertrofia">Hipertrofia</option>
+                            <option value="Resistencia">Resistência</option>
+                            <option value="Terapeutico">Terapêutico</option>
+                          </select>
+                        </div>
+      
+                        <!--Nível input-->
+                        <div class="relative mb-4">
+                          <label for="nivel" class="block text-neutral-500">Nível</label>
+                          <select name="nivel" id="nivel" multiple class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder-text-neutral-300">
+                            <option value="Iniciante">Iniciante</option>
+                            <option value="Intermediario">Intermediario</option>
+                            <option value="Avançado">Avançado</option>
+                          </select>
+                        </div>
+      
+                        <!--Objetivos input-->
+                        <div class="relative mb-4">
+                          <label for="objetivos" class="block text-neutral-500">Objetivos</label>
+                          {% for valor, display in objetivos_list %}
+                              <div class="flex items-center mb-2">
+                                <input type="checkbox" name="lesoes" value="{{ valor }}" class="mr-2" />
+                                <span class="text-neutral-500 dark:text-neutral-400">{{ display }}</span>
+                              </div>
+                          {% endfor %}
+                        </div>
+      
+                        <!--Restrições input-->
+                        <div class="relative mb-4">
+                          <label for="restricoes" class="block text-neutral-500">Restrições</label>
+                          {% for valor, display in restricoes_list %}
+                              <div class="flex items-center mb-2">
+                                <input type="checkbox" name="lesoes" value="{{ valor }}" class="mr-2" />
+                                <span class="text-neutral-500 dark:text-neutral-400">{{ display }}</span>
+                              </div>
+                          {% endfor %}
+                        </div>
+      
+                        <!--Submit button-->
+                        <div class="mb-12 pb-1 pt-1 text-center">
+                          <button class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" type="submit" data-twe-ripple-init data-twe-ripple-color="light" style="background: linear-gradient(to right, #6D0000, #6D0000, #6D0000, #6D0000);">
+                            Criar
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <select name="nivel" id="nivel" multiple>
-            <option value="Iniciante">Iniciante</option>
-            <option value="Intermediario">Intermediario</option>
-            <option value="Avançado">Avançado</option> 
-        </select><br>
-
-        <label for="objetivos">Objetivos:</label><br>
-        {% for valor, display in objetivos_list %}
-            <input type="checkbox" name="lesoes" value="{{ valor }}"> {{ display }}<br>
-        {% endfor %}
-        <br>
-
-        <label for="restricoes">Restrições:</label><br>
-        {% for valor, display in restricoes_list %}
-            <input type="checkbox" name="lesoes" value="{{ valor }}"> {{ display }}<br>
-        {% endfor %}
-        <br>
-
-        <button type="submit">Criar</button>
-
-    </form>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js" integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

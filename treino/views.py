@@ -32,7 +32,7 @@ def criar_treino(request):
             exercicio.save()
 
             return render(request, "admin_home.html", context={
-                "msg" : "Exercicio criado com sucesso!"
+                "msg" : "Exercicio criado com sucesso!",   
             })
     else:
         return redirect('default_view')
@@ -67,7 +67,7 @@ def gerar_exercicios(request):
             return ','.join(selected_options)
 
         for i in range(1, 41):
-            nome = f"Exercicio {i}"
+            nome = f"Exercicio {random.randint(50,500)}"
             descricao = f"Descricao do exercicio {i}"
             tipo = random.choice(TIPO_CHOICES)
             nivel = random.choice(NIVEL_CHOICES)
@@ -106,13 +106,53 @@ def detalhe_treino(request, id):
         if treino == None:
             return HttpResponse("Não encontrado treino com esse id: ")
         
-        if treino.aluno != aluno:
+        if treino.aluno != aluno and treino.personal != request.user:
             return HttpResponse("Você não tem autorização para acessar esse treino!")
 
         return render(request, "treino_detail.html", context={
             "treino" : treino,
+            "aluno" : aluno
         })
     except Exception as e:
         return HttpResponse("Não encontrado treino com esse id: "+ e )
 
 
+def detalhe_exercicio(request, serie_id, ex_id):
+
+    try:
+        serie = Serie.objects.filter(id=serie_id).first()
+        ex = Exercicio.objects.filter(id=ex_id).first()
+        
+        if ex == None:
+            return HttpResponse("Exercicio não encontrado.")
+        
+        if serie == None:
+            return HttpResponse("Serie não encontrada.")
+
+        print("passou")
+        return render(request, "exercicio_detail.html", context={
+            "ex" : ex,
+            "serie": serie,
+        })
+
+    except:
+        print("except")
+        return HttpResponse("Exercicio ou Serie não encontrado(a).")
+
+
+
+def aluno_concluir_treino(request, id):
+
+    treino = Treino.objects.filter(id=id).first()
+    treino.concluido = True
+    treino.save()
+
+    return redirect('default_view')
+
+
+def personal_aprovar_treino(request, id):
+    treino = Treino.objects.filter(id=id).first()
+    treino.aceitou = True
+    treino.save()
+
+    return redirect('admin-home')

@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import Aluno
+from user.models import Aluno, CustomUser
 
 RESTRICOES_CHOICES = [
     ('Cabeça', 'Cabeça'),
@@ -99,8 +99,10 @@ class Exercicio(models.Model):
 
 class Treino(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    personal = models.ForeignKey(CustomUser,null=True ,on_delete=models.CASCADE)
     data = models.DateField()
     concluido = models.BooleanField(default=False)
+    aceitou = models.BooleanField(default=False, null=True)
 
     def __str__(self):
         return f"Treino de {self.aluno.user.nome} em {self.data}"
@@ -119,3 +121,7 @@ class Serie(models.Model):
 
     def __str__(self):
         return f"{self.exercicio.nome} - (Treino: {self.treino.aluno.user.nome} em {self.treino.data})"
+    
+
+
+

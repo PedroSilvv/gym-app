@@ -1,6 +1,7 @@
 from ..models import Exercicio, Treino, Serie
-from user.models import Aluno
+from user.models import Aluno, CustomUser
 from datetime import date
+import random
 
 def filtrar_exercicios(aluno):
     # Filtrar por exp do Aluno
@@ -49,7 +50,14 @@ def gerar_treino_para_aluno(aluno):
     if not exercicios_adequados.exists():
         raise ValueError("Nenhum exercício adequado disponível para gerar treino")
 
-    treino = Treino.objects.create(aluno=aluno, data=date.today())
+    personais = CustomUser.objects.filter(groups__name='Admin')
+
+    if  not personais.exists():
+        raise ValueError("Nenhum Personal encontrado.")
+        
+    personal = random.choice(personais)
+
+    treino = Treino.objects.create(aluno=aluno, personal=personal ,data=date.today())
 
     # Tipos de exercícios a incluir no treino
     tipos_exercicios = ['Cardiovascular', 'Definição', 'Força', 'Funcional', 'Hipertrofia', 'Resistencia', 'Terapeutico']

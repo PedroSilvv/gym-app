@@ -9,6 +9,19 @@
 </head>
 <body class="h-screen bg-neutral-200 dark:bg-neutral-700">
 
+  <header class="bg-[#6D0000] flex justify-between items-center px-6 py-4">
+    <!-- Logo -->
+    <div>
+        <img src="{% static 'images/logoLogin.png' %}" alt="Logo" class="h-12">
+    </div>
+    <!-- Hamburger Menu Icon -->
+    <div class="space-y-1.5">
+        <div class="w-8 h-0.5 bg-white"></div>
+        <div class="w-8 h-0.5 bg-white"></div>
+        <div class="w-8 h-0.5 bg-white"></div>
+    </div>
+  </header>
+
     <section class="h-full">
         <div class="container h-full p-10 mx-auto">
           <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
@@ -26,7 +39,7 @@
       
                       <form method="post" action="{% url 'login' %}">
                         {% csrf_token %}
-                        <p class="mb-4">Please login to your account</p>
+                        <p class="mb-4">Por favor, conecte-se em sua conta.</p>
                         <!--Username input-->
                         <div class="relative mb-4">
                           <input
@@ -40,7 +53,7 @@
                           <input
                             type="password" name="password" id="id_password" required
                             class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary focus:border-red-500 dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0" placeholder="Password" />
-                          <label for="id_password" class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary">Password</label>
+                          <label for="id_password" class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary">Senha</label>
                         </div>
       
                         <!--Submit button-->
@@ -62,7 +75,7 @@
                   <div class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-e-lg lg:rounded-bl-none" style="background-image: url({% static 'images/backgroundLogo.png' %}); background-size: cover; background-position: center;">
                     <div class="px-4 py-6 text-white md:mx-6 md:p-12">
                       <h4 class="mb-6 text-xl font-semibold">We are more than just a company</h4>
-                      <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      <p class="text-sm">Alcance o seu potencial máximo! Transforme cada suor em vitória e cada esforço em conquista. Dedique-se diariamente, supere seus limites e construa um corpo forte e saudável. A jornada é difícil, mas os resultados são incríveis. Seu objetivo é a nossa motivação. Seja a melhor versão de você mesmo!</p>
                     </div>
                   </div>
                 </div>
@@ -71,6 +84,8 @@
           </div>
         </div>
       </section>
+
+   
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js" integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

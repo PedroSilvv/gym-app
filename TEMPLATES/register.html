@@ -1,73 +1,155 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Register</h2>
-    <p>{{msg}}</p>
-    <form method="post">
-        {% csrf_token %}
-        <label for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome" required><br>
+<body class="h-screen bg-neutral-200 dark:bg-neutral-700">
 
-        <label for="username">Username:</label>
-        <input type="text" name="matricula" id="matricula" required><br>
+    <section class="h-full">
+        <div class="container h-full p-10 mx-auto">
+          <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+            <div class="w-full">
+              <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
+                <div class="g-0 lg:flex lg:flex-wrap h-full">
+                  <!-- Left column container-->
+                  <div class="px-4 md:px-0 lg:w-6/12 flex items-center justify-center">
+                    <div class="md:mx-6 md:p-12">
+                      <!--Logo-->
+                      <div class="text-center">
+                        <img class="mx-auto w-16" src="{% static 'images/logo.png' %}" alt="logo" />
+                        <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">E-Personal</h4>
+                      </div>
+      
+                      <h2 class="text-center text-2xl font-semibold mb-4">Register</h2>
+                      <p class="text-center mb-4">{{msg}}</p>
+                      <form method="post">
+                        {% csrf_token %}
+                        <!--Nome input-->
+                        <div class="relative mb-4">
+                          <label for="nome" class="block text-neutral-500">Nome</label>
+                          <input type="text" name="nome" id="nome" required class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" placeholder="Nome" />
+                        </div>
+      
+                        <!--Username input-->
+                        <div class="relative mb-4">
+                          <label for="matricula" class="block text-neutral-500">Username</label>
+                          <input type="text" name="matricula" id="matricula" required class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" placeholder="Username" />
+                        </div>
+      
+                        <!--Email input-->
+                        <div class="relative mb-4">
+                          <label for="email" class="block text-neutral-500">Email</label>
+                          <input type="email" name="email" id="email" required class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" placeholder="Email" />
+                        </div>
+      
+                        <!--Password input-->
+                        <div class="relative mb-4">
+                          <label for="password" class="block text-neutral-500">Password</label>
+                          <input type="password" name="password" id="password" required class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" placeholder="Password" />
+                        </div>
 
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" required><br>
+                        <!--Peso input-->
+                        <div class="relative mb-4">
+                          <label for="peso" class="block text-neutral-500">Peso</label>
+                          <input type="number" step="0.1" name="peso" id="peso" class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" placeholder="Peso" />
+                        </div>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br>
+                        <!--Altura input-->
+                        <div class="relative mb-4">
+                          <label for="altura" class="block text-neutral-500">Altura</label>
+                          <input type="number" name="altura" id="altura" placeholder="Coloque a altura em CM" class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" />
+                        </div>
 
+                        <!--Experiencia input-->
+                        <div class="relative mb-4">
+                          <label for="experiencia" class="block text-neutral-500">Experiência</label>
+                          <select name="experiencia" id="experiencia" multiple class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300">
+                            <option value="Iniciante">Iniciante</option>
+                            <option value="Intermediario">Intermediario</option>
+                            <option value="Avançado">Avançado</option>
+                          </select>
+                        </div>
 
-        <label for="peso">Peso:</label><br>
-        <input type="number" step="0.1" name="peso" id="peso"><br>
+                        <!--Dias de treino input-->
+                        <div class="relative mb-4">
+                          <label for="dias" class="block text-neutral-500">Dias de treino por semana</label>
+                          <input type="number" name="dias" id="dias" placeholder="Treinos semanais." class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300" />
+                        </div>
 
-        <label for="altura">Altura:</label><br>
-        <input type="number" name="altura" id="altura" placeholder="Coloque a altura em CM"><br>
+                        <!--Esportes input-->
+                        <div class="relative mb-4">
+                          <label for="esportes" class="block text-neutral-500">Esportes</label>
+                          <select name="esportes" id="esportes" multiple class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300">
+                            {% for esporte in esportes %}
+                                <option value="{{ esporte.id }}">{{ esporte.nome }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
 
-        <select name="experiencia" id="experiencia" multiple>
-            <option value="Iniciante">Iniciante</option>
-            <option value="Intermediario">Intermediario</option>
-            <option value="Avançado">Avançado</option> 
-        </select><br>
+                        <!--Lesoes input-->
+                        <div class="relative mb-4">
+                          <label for="lesoes" class="block text-neutral-500">Lesões</label>
+                          {% for value, display in lesoes_list %}
+                            <div class="flex items-center mb-2">
+                              <input type="checkbox" name="lesoes" value="{{ value }}" class="mr-2" />
+                              <span class="text-neutral-500 dark:text-neutral-400">{{ display }}</span>
+                            </div>
+                          {% endfor %}
+                        </div>
 
-        <label for="dias">Dias de treino por semana:</label><br>
-        <input type="number" name="dias" id="dias" placeholder="Treinos semanais."><br>
+                        <!--Objetivos input-->
+                        <div class="relative mb-4">
+                          <label for="objetivos" class="block text-neutral-500">Objetivos</label>
+                          {% for value, display in objetivos_list %}
+                            <div class="flex items-center mb-2">
+                              <input type="checkbox" name="objetivos" value="{{ value }}" class="mr-2" />
+                              <span class="text-neutral-500 dark:text-neutral-400">{{ display }}</span>
+                            </div>
+                          {% endfor %}
+                        </div>
 
-        <label for="esportes">Esportes:</label>
-        <br>
-        <select name="esportes" id="esportes" multiple>
-            {% for esporte in esportes %}
-                <option value="{{ esporte.id }}">{{ esporte.nome }}</option>
-            {% endfor %}
-        </select><br>
-        <br>
-        <br>
-        <label for="lesoes">Lesões:</label><br>
-        {% for value, display in lesoes_list %}
-            <input type="checkbox" name="lesoes" value="{{ value }}"> {{ display }}<br>
-        {% endfor %}
-        <br>
+                        <!--Observacoes input-->
+                        <div class="relative mb-4">
+                          <label for="observacoes" class="block text-neutral-500">Observações</label>
+                          {% for value, display in observacoes_list %}
+                            <div class="flex items-center mb-2">
+                              <input type="checkbox" name="observacoes" value="{{ value }}" class="mr-2" />
+                              <span class="text-neutral-500 dark:text-neutral-400">{{ display }}</span>
+                            </div>
+                          {% endfor %}
+                        </div>
 
-        <label for="objetivos">Objetivos:</label><br>
-        {% for value, display in objetivos_list %}
-            <input type="checkbox" name="objetivos" id="objetivos" value="{{ value }}"> {{ display }}<br>
-        {% endfor %}
-        <br>
+                        <!--Role input-->
+                        <div class="relative mb-4">
+                          <label for="role" class="block text-neutral-500">Role</label>
+                          <select name="role" id="role" class="block w-full rounded border px-3 py-2 leading-normal outline-none transition-all duration-200 ease-linear dark:bg-neutral-900 dark:text-white dark:border-neutral-700 dark:placeholder:text-neutral-300">
+                            <option value="Default">Default</option>
+                            <option value="Admin">Admin</option>
+                          </select>
+                        </div>
 
-        <label for="observacoes">Observações:</label><br>
-        {% for value, display in observacoes_list %}
-            <input type="checkbox" name="observacoes" id="observacoes" value="{{ value }}"> {{ display }}<br>
-        {% endfor %}
-        <br>
+                        <!--Submit button-->
+                        <div class="mb-12 pb-1 pt-1 text-center">
+                          <button class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong" type="submit" data-twe-ripple-init data-twe-ripple-color="light" style="background: linear-gradient(to right, #6D0000, #6D0000, #6D0000, #6D0000);">
+                            Register
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
 
-        <select name="role" id="role">
-            <option value="Default">Default</option>
-            <option value="Admin">Admin</option>
-        </select>
-        <button type="submit">Register</button>
-    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.js" integrity="sha512-6m6AtgVSg7JzStQBuIpqoVuGPVSAK5Sp/ti6ySu6AjRDa1pX8mIl1TwP9QmKXU+4Mhq/73SzOk6mbNvyj9MPzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+{% load static %}
+{%if mostrar_notificacoes%}
+<div id="notification-panel" class="notification-panel w-80 bg-[#262626] shadow-lg rounded-lg overflow-hidden text-white absolute top-20 right-10">
+    <div class="p-4 border-b border-gray-700">
+      <h2 class="text-xl font-semibold">Notificações</h2>
+    </div>
+    <div class="flex justify-between items-center p-2 border-b border-gray-700">
+      <button class="text-gray-400 font-semibold focus:outline-none">Tudo</button>
+      <button class="text-gray-400 focus:outline-none">Não lidas</button>
+    </div>
+    <div class="p-2">
+      <h3 class="text-gray-400 font-semibold">Novas</h3>
+      {%for notificacao in notificacoes%}
+        <div class="flex items-center space-x-3 p-2 hover:bg-gray-700 rounded-lg cursor-pointer">
+          <a href="{% url 'detalhe-treino' notificacao.id %}"><img src="{% static 'images/logoLogin.png' %}" alt="Profile" class="w-10 h-full rounded-full"></a>
+          <div class="flex-1">
+            <a href="{% url 'detalhe-treino' notificacao.id %}"><p class="text-gray-300 text-sm">Um treino pendente do aluno(a) <span class="font-semibold">{{notificacao.aluno.user.nome}}</span> aguardando o <span class="font-semibold">feedback.</span></p></a>
+            <p class="text-gray-500 text-xs">{{notificacao.data}}</p>
+          </div>
+          <span class="inline-block w-2 h-2 bg-[#6D0000] rounded-full"></span>
+        </div>
+        {%endfor%}
+    </div>
+
+  </div>
+  {%endif%}

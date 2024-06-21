@@ -118,7 +118,7 @@ def admin_home(request):
 
     if request.user.groups.filter(name='Admin').exists():
         personal = request.user
-        treinos_para_feedback = Treino.objects.filter(personal=personal)
+        treinos_para_feedback = Treino.objects.filter(personal=personal).order_by('-data') #aceitou=False
 
         return render(request, "admin_home.html", context={
             "notificacoes" : treinos_para_feedback,

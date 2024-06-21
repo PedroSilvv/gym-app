@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 import random
 from .utils.treino_utils import filtrar_exercicios, determinar_series_repeticoes, gerar_treino_para_aluno
 from user.models import Aluno, CustomUser
+from datetime import date
 
 @login_required(login_url='/user/login/')
 def criar_treino(request):
@@ -156,3 +157,35 @@ def personal_aprovar_treino(request, id):
     treino.save()
 
     return redirect('admin-home')
+
+
+def edit_treino(request, id):
+
+    if request.method == 'GET':
+        return render(request,'edit_treino.html', context={
+            "exercicios" : Exercicio.objects.all(),
+            "treino" : Treino.objects.filter(id=id).first(),
+        })
+    
+    else:
+        treino = Treino.objects.filter(id=id).first()
+        treino.series.all().delete()
+
+        if treino == None:
+            return HttpResponse('Treino não encontrado!')
+
+        series_count = len([key for key in request.POST.keys() if key.startswith('exercicio_')])
+        
+        for i in range(1, series_count + 1):
+            exercicio_id = request.POST.get(f'exercicio_{i}')
+            numero_series = request.POST.get(f'numero_series_{i}')
+            repeticoes_por_serie = request.POST.get(f'repeticoes_por_serie_{i}')
+            
+            Serie.objects.create(
+                treino=treino,
+                exercicio=Exercicio.objects.get(id=exercicio_id),
+                numero_series=numero_series,
+                repeticoes_por_serie=repeticoes_por_serie
+            )
+        
+        return redirect('admin-home')

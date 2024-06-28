@@ -90,7 +90,12 @@ def gerar_exercicios(request):
 def aluno_gerar_treino(request):
     user = request.user
     aluno = get_object_or_404(Aluno, user=user)
+    treinos_aluno = Treino.objects.filter(aluno=aluno)
 
+    if treinos_aluno.exists():
+        for x in treinos_aluno:
+            if x.aceitou == False:
+                return HttpResponse('Aluno ja possui treino para ser aceito.')
     try:
         gerar_treino_para_aluno(aluno)
         return redirect('default_view')
@@ -123,6 +128,10 @@ def detalhe_exercicio(request, serie_id, ex_id):
     try:
         serie = Serie.objects.filter(id=serie_id).first()
         ex = Exercicio.objects.filter(id=ex_id).first()
+        aluno = serie.treino.aluno.user
+        
+        if aluno != request.user and aluno.personal != request.user:
+            return HttpResponse("Não autorizado")
         
         if ex == None:
             return HttpResponse("Exercicio não encontrado.")
@@ -187,5 +196,7 @@ def edit_treino(request, id):
                 numero_series=numero_series,
                 repeticoes_por_serie=repeticoes_por_serie
             )
+        treino.aceitou = True
+        treino.save()
         
         return redirect('admin-home')

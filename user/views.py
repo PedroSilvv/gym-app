@@ -118,7 +118,7 @@ def admin_home(request):
 
     if request.user.groups.filter(name='Admin').exists():
         personal = request.user
-        treinos_para_feedback = Treino.objects.filter(personal=personal).order_by('-data') #aceitou=False
+        treinos_para_feedback = Treino.objects.filter(personal=personal, aceitou=False).order_by('-data') #aceitou=False
 
         return render(request, "admin_home.html", context={
             "notificacoes" : treinos_para_feedback,
@@ -127,3 +127,14 @@ def admin_home(request):
     else:
         return redirect('default_view')
 
+
+def alunos_list(request):
+    if request.user.groups.filter(name='Admin').exists():
+        personal = request.user
+        alunos_list = Aluno.objects.all()
+        return render(request, "alunos_list.html", context={
+            "alunos" : alunos_list,
+            "mostrar_notificacoes" : False,
+        })
+    else:
+        return redirect('default_view')

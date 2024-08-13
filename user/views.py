@@ -105,11 +105,13 @@ def default_view(request):
 
     if request.user.groups.filter(name='Default').exists():
         aluno = get_object_or_404(Aluno, user=request.user)
-        
+        print(Treino.objects.filter(aluno=aluno, concluido=False, aceitou=False).count())
         return render(request, "default.html", context={
             "user" : f"{request.user.nome}",
-            "treinos" : Treino.objects.filter(aluno=aluno, concluido=False, aceitou=True)
+            "treinos" : Treino.objects.filter(aluno=aluno, concluido=False, aceitou=True),
+            "treino_pendente" : Treino.objects.filter(aluno=aluno, concluido=False, aceitou=False).count()
         })
+        
     else:
         return redirect('admin-home')
     
@@ -138,3 +140,17 @@ def alunos_list(request):
         })
     else:
         return redirect('default_view')
+
+
+
+def aluno_profile(request, id):
+
+    aluno_user = CustomUser.objects.filter(id=id).first()
+    aluno = get_object_or_404(Aluno, user=aluno_user)
+
+
+    return render(request, "aluno_profile.html", context={
+            "aluno" : f"{aluno.user.nome}",
+            "treinos" : Treino.objects.filter(aluno=aluno, concluido=False, aceitou=True),
+            "treino_pendente" : Treino.objects.filter(aluno=aluno, concluido=False, aceitou=False).count()
+        })

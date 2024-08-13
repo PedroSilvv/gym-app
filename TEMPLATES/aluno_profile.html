@@ -65,19 +65,13 @@
                 <div class="flex items-center gap-4">
                     <button
                         class="rounded-full border border-solid border-gray-300 bg-gray-50 py-3 px-4 text-sm font-semibold text-gray-900 shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-50 hover:bg-gray-100 hover:border-gray-300">Message</button>
-                    <a href="{% url 'aluno-gerar-treino' %}">
-                        <button
-                            class="rounded-full border border-solid border-[#6D0000] bg-[#6D0000] py-3 px-4 text-sm font-semibold text-white whitespace-nowrap shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:bg-[#8B0000] hover:border-[#8B0000]">
-                            Gerar Treino
-                        </button>
-                    </a>
                 </div>
             </div>
-            <h3 class="text-center font-manrope font-bold text-3xl leading-10 text-gray-900 mb-3">{{ user }}</h3>
+            <h3 class="text-center font-manrope font-bold text-3xl leading-10 text-gray-900 mb-3">{{ aluno }}</h3>
             {% if treino_pendente > 0%}
-                <p class="font-normal text-base leading-7 text-gray-500 text-center mb-8">Aluno já possui treino pendente.</p>
+                <p class="font-normal text-base leading-7 text-gray-500 text-center mb-8">Aluno não possui treino aceito.</p>
             {%else%}
-                <p class="font-normal text-base leading-7 text-gray-500 text-center mb-8">Seus próximos treinos:</p>
+                <p class="font-normal text-base leading-7 text-gray-500 text-center mb-8">Treinos de {{aluno}}</p>
             {%endif%}
 
         </div>
